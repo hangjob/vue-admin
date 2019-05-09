@@ -1,27 +1,21 @@
 <template>
-    <section>
-         <router-view></router-view>
-    </section>
+   <div>11111</div>
 </template>
 <script>
-import Card  from '../../common/component/base/card/card.vue'
-import Nmuber from '../../common/component/base/card/number.vue'
+import Left from '../../common/component/left.vue'
+import Headers from '../../common/component/headers.vue';
 export default {
     components:{
-        Card,Nmuber
-    },
-    data(){
-        return {
-            
-        }
+        Headers,Left
     },
     mounted(){
+        console.log(this)
     }
 }
 </script>
 <style lang="less" scoped>
-  .center{
-      display: flex;
-      justify-content:space-between;
-  }
+.content{
+    height: 100%;
+    width: 100%;
+}
 </style>

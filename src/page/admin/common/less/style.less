@@ -2,6 +2,13 @@ html,body{
     height: 100%;
     background-color: #e7e7e7;
 }
+
+//定义一个变量和一个px2rem
+@baseFontSize: 100;//基于视觉稿横屏尺寸/100得出的基准font-size
+.px2rem(@name, @px){
+    @{name}: @px / @baseFontSize * 1rem;
+}
+
 .clearfix:before,
 .clearfix:after {
     display: table;

@@ -48,6 +48,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "copy-webpack-plugin": "^5.0.3",
     "iview": "^3.3.3",
     "lodash": "^4.17.11",
     "vue": "^2.6.7",

@@ -24,12 +24,17 @@ export default {
         $route: {
             handler: function(val, oldVal){
                if(val.matched){
+                   console.log(val)
                    this.currentPath = val.matched
                }
             },
             // 深度观察监听
             deep: true
         }
+    },
+    created(){
+        // 刷新之后上来的赋值
+        this.currentPath = this.$route.matched
     },
     mounted(){
         

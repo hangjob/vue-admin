@@ -9,6 +9,7 @@ const multiple = require("../pages.js");
 
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const entry = {};
 const plugins = [];
@@ -102,7 +103,15 @@ const baseConfg = {
             chunkFilename: "[id].css"
         }),
         //https://vue-loader.vuejs.org/zh/guide/#%E6%89%8B%E5%8A%A8%E8%AE%BE%E7%BD%AE  参考官网
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+
+        new CopyWebpackPlugin([
+            {
+                from: path.resolve(__dirname, "../static"), // 不打包直接输出的文件
+                to: "/static", // 打包后静态文件放置位置
+                ignore: [".*"] // 忽略规则。（这种写法表示将该文件夹下的所有文件都复制）
+            }
+        ])
     ]),
     resolve:{
         alias:{

@@ -20,7 +20,9 @@ Vue.use(iView);
 //状态管理
 import store from "../src/store/index";
 
-import "../src/assets/animate.css@3.5.1.css";
+import "../static/animate.css@3.5.1.css";
+
+import "../static/font-awesome-4.7.0/css/font-awesome.min.css";
 
 import "../src/page/admin/common/less/style.less";
 
@@ -37,7 +39,7 @@ router.beforeEach((to, from, next) => {
         alert("浏览器不支持");
     }else{
         // 一般用于 登录 权限
-        const role = "getToken";
+        const role = localStorage.getItem("token");
         if(!role && to.path !== "/login"){
             next("/login");
         }else{

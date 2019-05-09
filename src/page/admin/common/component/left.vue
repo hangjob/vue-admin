@@ -45,7 +45,7 @@ export default {
         if(this.$router.options.routes.length != 0){
             let routers = JSON.parse(JSON.stringify(this.$router.options));
             routers.routes.splice(0,1)
-            this.menus = routers.routes
+            this.menus = routers.routes[0].children
             console.log(this.menus)
         }else{
             // 默认值
