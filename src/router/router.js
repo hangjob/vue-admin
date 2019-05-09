@@ -41,12 +41,19 @@ export default new VueRouter({
                         },
                         {
                             path: "/site2",
-                            component: resolve=> require(["../page/admin/menu/site/site.vue"],resolve),
+                            component: resolve=> require(["../page/admin/menu/site/site2.vue"],resolve),
                             meta: { title: "用户管理2",icon: "fa-pie-chart"},
                             shows: false,
                             hidden: true,
                         }
                     ]
+                },
+                {
+                    path: "/webit",
+                    component: resolve=> require(["../page/admin/menu/site/site2.vue"],resolve),
+                    meta: { title: "前端网址",icon: "fa-pie-chart"},
+                    shows: false,
+                    hidden: true,
                 },
             ]
         },
