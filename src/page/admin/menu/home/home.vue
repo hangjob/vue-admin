@@ -1,5 +1,5 @@
 <template>
-   <div>11111</div>
+   <div>home</div>
 </template>
 <script>
 import Left from '../../common/component/left.vue'

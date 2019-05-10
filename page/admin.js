@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 import Admin from "../src/page/admin/admin.vue";
-import router from "../src/router/router";
+import router from "../src/router/index.js";
 import { getOs } from "../util/util";
 
 import lodash from "lodash";
@@ -28,7 +28,6 @@ import "../src/page/admin/common/less/style.less";
 
 // 通过路由钩子函数判断做出你响应的业务需求
 router.beforeEach((to, from, next) => {
-    
     // 判断路由有无
     if(!to.matched || to.matched.length===0){
         next("404");
@@ -56,4 +55,4 @@ new Vue({
     beforeCreate(){
         Vue.prototype.bus = this;
     }
-}); 
+});

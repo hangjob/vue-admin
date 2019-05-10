@@ -7,7 +7,11 @@
             <section class="content">
                 <Headers></Headers>
                 <div style="padding:0 1%;">
-                    <router-view></router-view>
+                     <transition name="fade" mode="out-in">
+                        <keep-alive>
+                            <router-view></router-view>
+                         </keep-alive>
+                    </transition>
                 </div> 
             </section>
         </Col>

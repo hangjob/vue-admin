@@ -4,24 +4,24 @@
         <div class="menu">
             <ul>
                 <li v-for="item,i in menus" :key="i">
-                    <div :class="['level','level-one','flex-center',{active:item.shows}]" v-on:click.stop.prevent="clickActive(i)">
-                        <div><i :class="['fa','ft10','ft-gray',item.meta.icon]"></i></div>
-                        <div><span class="ft8 ft-gray">{{item.meta.title}}</span></div>
+                    <div :class="['level','level-one','flex-center','active']" @click="clickActive(item.index)">
+                        <div><i :class="['fa','ft10','ft-gray',item.icon]"></i></div>
+                        <div><span class="ft8 ft-gray">{{item.title}}</span></div>
                         <div><i v-if="item.children && item.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i></div>
                     </div>
                     <transition name="bounce">
-                        <ul class="level-two" v-show="item.shows && item.children && item.children.length != 0">
-                            <li v-for="item,j in item.children" :key="j">
-                                <div :class="['level-two-name','flex-center',{active:item.shows}]" v-on:click.stop.prevent="clickActive(i,j)">
-                                    <span class="ft8 ft-gray flex1">{{item.meta.title}}</span>
-                                    <i v-if="item.children && item.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i>
+                        <ul class="level-two" v-show="item.children && item.children.length != 0">
+                            <li v-for="chid,j in item.children" :key="j">
+                                <div @click="clickActive(chid.index)" :class="['level-two-name','flex-center','active']">
+                                    <span class="ft8 ft-gray flex1">{{chid.title}}</span>
+                                    <i v-if="chid.children && chid.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i>
                                 </div>
                                 <transition name="bounce">
-                                    <ul class="level-three" v-show="item.shows && item.children && item.children.length != 0" >
-                                        <li v-for="item,k in item.children" :key="k">
-                                            <div :class="['level-two-name','flex-center',{active:item.shows}]" v-on:click.stop.prevent="clickActive(i,j,k)">
-                                                <span class="ft8 ft-gray flex1">{{item.meta.title}}</span>
-                                                <i v-if="item.children && item.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i>
+                                    <ul class="level-three" v-show="chid.children && chid.children.length != 0" >
+                                        <li v-for="son,k in chid.children" :key="k">
+                                            <div :class="['level-two-name','flex-center']" @click="clickActive(son.index)">
+                                                <span class="ft8 ft-gray flex1">{{son.title}}</span>
+                                                <i v-if="son.children && son.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i>
                                             </div>
                                         </li>
                                     </ul>
@@ -35,6 +35,7 @@
     </section>
 </template>
 <script>
+import routers from "../../../../router/router.js"
 export default {
     data(){
         return {
@@ -42,45 +43,12 @@ export default {
         }
     },
     created(){
-        if(this.$router.options.routes.length != 0){
-            let routers = JSON.parse(JSON.stringify(this.$router.options));
-            routers.routes.splice(0,1)
-            this.menus = routers.routes[0].children
-            console.log(this.menus)
-        }else{
-            // 默认值
-            this.menus = [{name:"暂无菜单",icon:"fa-pie-chart"}]
-        }
+        this.menus = routers;
+        console.log(this.menus)
     },
     methods:{
-        clickActive(i,j,k){
-            if((i || i == 0) && (j || j == 0) && (k || k == 0)){
-                this.menus[i].children[j].children[k].shows = !this.menus[i].children[j].children[k].shows;
-                if(this.menus[i].children[j].children[k].path){
-                    if(!this.menus[i].children[j].children[k].children || this.menus[i].children[j].children[k].children == 0){
-                        this.$router.push(this.menus[i].children[j].children[k].path)
-                    }
-                }
-                return false;
-            }
-            if((i || i == 0) && (j || j == 0)){
-                this.menus[i].children[j].shows = !this.menus[i].children[j].shows;
-                if(this.menus[i].children[j].path){
-                   if(!this.menus[i].children[j].children || this.menus[i].children[j].children == 0){
-                        this.$router.push(this.menus[i].children[j].path)
-                    }
-                }
-                return false;
-            }
-            if(i || i == 0){
-                this.menus[i].shows = !this.menus[i].shows;
-                if(this.menus[i].path){
-                    if(!this.menus[i].children || this.menus[i].children == 0){
-                        this.$router.push(this.menus[i].path)
-                    }
-                }
-                return false;
-            }
+        clickActive(i){
+           this.$router.push(i)
         }
     }
 }
