@@ -3,7 +3,7 @@
         <div class="top">
             <slot name="top">
                 <div class="icon"><i class="fa fa-gg-circle ft10"></i></div>
-                <div class="title"><span class="ft10">业绩总览</span></div>
+                <div class="title"><span class="ft10">{{title}}</span></div>
             </slot>
         </div>
         <div class="center clearfix">
@@ -17,6 +17,12 @@
 <script>
 
 export default {
+    props:{
+        title:{
+            type: String,
+            default: '暂无标题'
+        }
+    },
     mounted(){
         
     }

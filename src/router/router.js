@@ -8,16 +8,16 @@ const routers =  [
     },
     {
         icon: "fa-pie-chart",
-        title: "内容管理",
+        title: "组件演示",
         shows:false, // 是否开始就是显示下面的子菜单
         children:[
             {
-                index: "/contentste",
-                title: "内容管理"
+                index: "/preview",
+                title: "网页预览"
             },
             {
-                index: "/navste",
-                title: "导航管理"
+                index: "/imgste",
+                title: "图片预览"
             },
             {
                 index: "/blockste",

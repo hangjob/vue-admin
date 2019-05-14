@@ -4,7 +4,7 @@
         <div class="menu">
             <ul>
                 <li v-for="item,i in menus" :key="i">
-                    <div :class="['level','level-one','flex-center',{active:active == i}]" @click="clickActive(item.index,menus[i],i)">
+                    <div :class="['level','level-one','flex-center',{active:active === i}]" @click="clickActive(item.index,menus[i],i)">
                         <div><i :class="['fa','ft10','ft-gray',item.icon]"></i></div>
                         <div><span class="ft8 ft-gray">{{item.title}}</span></div>
                         <div><i v-if="item.children && item.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i></div>
@@ -40,7 +40,7 @@ export default {
     data(){
         return {
             menus:[],
-            active:0
+            active:'0'
         }
     },
     created(){

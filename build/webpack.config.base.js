@@ -11,6 +11,8 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+
 const entry = {};
 const plugins = [];
 
@@ -80,7 +82,21 @@ const baseConfg = {
             {
                 // https://github.com/crlang/easy-webpack-4/blob/master/webpack.config.js 处理图片和CSS加载资源路径
                 // https://segmentfault.com/q/1010000013910511 
-                test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+                test: /\.(gif|jpg|png)\??.*$/,
+                use: [{
+                    loader: "url-loader",
+                    options: {
+                        name: "[name].[ext]",
+                        publicPath: "./images/",
+                        outputPath: "images/", //输出文件目录
+                        limit:8192 //大于该字节采用图片输出否则输出base64
+                    }
+                }]
+            },
+            {
+                // https://github.com/crlang/easy-webpack-4/blob/master/webpack.config.js 处理图片和CSS加载资源路径
+                // https://segmentfault.com/q/1010000013910511 
+                test: /\.(woff|svg|eot|ttf)\??.*$/,
                 use: [{
                     loader: "url-loader",
                     options: {
@@ -111,7 +127,9 @@ const baseConfg = {
                 to: "/static", // 打包后静态文件放置位置
                 ignore: [".*"] // 忽略规则。（这种写法表示将该文件夹下的所有文件都复制）
             }
-        ])
+        ]),
+
+        new UglifyJSPlugin()
     ]),
     resolve:{
         alias:{

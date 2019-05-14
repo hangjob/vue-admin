@@ -3,19 +3,16 @@
         <div class="login-admin">
             <div class="flex">
                 <div class="title">
-                    <h3>后端管理系统</h3>
+                    <h3>管理系统</h3>
                     <p>vipbic分享你我快乐</p>
                 </div>
                 <div class="user">
                     <div class="icon"><i class="fa fa-user-o"></i></div>
-                    <div><input placeholder="请输入用户名"/></div>
+                    <div><input value="admin" placeholder="请输入用户名"/></div>
                 </div>
                 <div class="user">
                     <div class="icon"><i class="fa fa-unlock-alt"></i></div>
-                    <div><input placeholder="请输入登录密码" type="password"/></div>
-                </div>
-                <div>
-
+                    <div><input value="123456" placeholder="请输入登录密码" type="password"/></div>
                 </div>
                 <div class="submit" @click="submit">
                     <div>登录</div>
@@ -38,6 +35,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+    div,input,p,h3{
+       font-family: Hind Siliguri,sans-serif;
+    }
     .login{
         position: relative;
         width: 100%;
@@ -46,7 +46,7 @@ export default {
         background-repeat: no-repeat;
         background-size:cover;
         .login-admin{
-            padding: 60px 40px;
+            padding: 60px 50px 50px 50px;
             display: inline-block;
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
@@ -76,7 +76,7 @@ export default {
                 border-bottom: 1px solid #b9b9b9;
                 align-items: center;
                 justify-content: center;
-                margin-bottom: 15px;
+                margin-bottom: 20px;
                 padding: 5px 1px;
                 .icon{
                     margin-right: 6px;

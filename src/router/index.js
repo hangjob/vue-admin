@@ -17,18 +17,18 @@ export default new VueRouter({
             children:[
                 {
                     path: "/home",
-                    component: resolve=> require(["../page/admin/menu/home/home.vue"],resolve),
+                    component: resolve=> require(["../page/admin/menu/site/site.vue"],resolve),
                     meta: { title: "系统首页"},
                 },
                 {
-                    path: "/contentste",
-                    component: resolve=> require(["../page/admin/menu/site/site.vue"],resolve),
-                    meta: { title: "内容管理"},
+                    path: "/preview",
+                    component: resolve=> require(["../page/admin/menu/preview/preview.vue"],resolve),
+                    meta: { title: "网页预览"},
                 },
                 {
-                    path: "/navste",
-                    component: resolve=> require(["../page/admin/menu/site/site2.vue"],resolve),
-                    meta: { title: "导航管理"},
+                    path: "/imgste",
+                    component: resolve=> require(["../page/admin/menu/imgste/imgste.vue"],resolve),
+                    meta: { title: "图片预览"},
                 },
                 {
                     path: "/blockste",
