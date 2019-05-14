@@ -4,22 +4,22 @@
         <div class="menu">
             <ul>
                 <li v-for="item,i in menus" :key="i">
-                    <div :class="['level','level-one','flex-center','active']" @click="clickActive(item.index)">
+                    <div :class="['level','level-one','flex-center',{active:active == i}]" @click="clickActive(item.index,menus[i],i)">
                         <div><i :class="['fa','ft10','ft-gray',item.icon]"></i></div>
                         <div><span class="ft8 ft-gray">{{item.title}}</span></div>
                         <div><i v-if="item.children && item.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i></div>
                     </div>
                     <transition name="bounce">
-                        <ul class="level-two" v-show="item.children && item.children.length != 0">
+                        <ul class="level-two" v-show="item.shows && item.children && item.children.length != 0">
                             <li v-for="chid,j in item.children" :key="j">
-                                <div @click="clickActive(chid.index)" :class="['level-two-name','flex-center','active']">
+                                <div @click="clickActive(chid.index,menus[i].children[j],''+i+j)" :class="['level-two-name','flex-center',{active:active == ''+i+j}]">
                                     <span class="ft8 ft-gray flex1">{{chid.title}}</span>
                                     <i v-if="chid.children && chid.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i>
                                 </div>
                                 <transition name="bounce">
-                                    <ul class="level-three" v-show="chid.children && chid.children.length != 0" >
+                                    <ul class="level-three" v-show="chid.shows && chid.children && chid.children.length != 0" >
                                         <li v-for="son,k in chid.children" :key="k">
-                                            <div :class="['level-two-name','flex-center']" @click="clickActive(son.index)">
+                                            <div :class="['level-two-name','flex-center',{active:active == ''+i+j+k}]" @click="clickActive(son.index,menus[i].children[j].children[k],''+i+j+k)">
                                                 <span class="ft8 ft-gray flex1">{{son.title}}</span>
                                                 <i v-if="son.children && son.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i>
                                             </div>
@@ -39,16 +39,21 @@ import routers from "../../../../router/router.js"
 export default {
     data(){
         return {
-            menus:[]
+            menus:[],
+            active:0
         }
     },
     created(){
         this.menus = routers;
-        console.log(this.menus)
     },
     methods:{
-        clickActive(i){
-           this.$router.push(i)
+        clickActive(path,item,i){
+            if(path){
+                this.active = i;
+                this.$router.push(path);
+            }else{
+                item.shows = !item.shows
+            }
         }
     }
 }

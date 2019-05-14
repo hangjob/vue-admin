@@ -13,7 +13,7 @@ export default new VueRouter({
         {
             path: "/",
             component: resolve=> require(["../page/admin/common/component/main.vue"],resolve),
-            meta: { title: "系统"},
+            meta: { title: ""},
             children:[
                 {
                     path: "/home",
@@ -62,11 +62,11 @@ export default new VueRouter({
                 },
             ]
         },
-        // {
-        //     path: "*",
-        //     component: resolve=> require(["../page/admin/menu/404/404.vue"],resolve),
-        //     meta: { title: "404"},
-        // },
+        {
+            path: "*",
+            component: resolve=> require(["../page/admin/menu/404/404.vue"],resolve),
+            meta: { title: "404"},
+        },
         {
             path: "/login",
             component: resolve=> require(["../page/admin/menu/login/login.vue"],resolve),
