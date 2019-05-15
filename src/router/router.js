@@ -20,8 +20,8 @@ const routers =  [
                 title: "按钮预览"
             },
             {
-                index: "/blockste",
-                title: "板块管理"
+                index: "/pushset",
+                title: "桌面通知"
             },
             {
                 index: "/reviewste",

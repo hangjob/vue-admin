@@ -31,9 +31,9 @@ export default new VueRouter({
                     meta: { title: "按钮预览"},
                 },
                 {
-                    path: "/blockste",
-                    component: resolve=> require(["../page/admin/menu/site/site.vue"],resolve),
-                    meta: { title: "板块管理"},
+                    path: "/pushset",
+                    component: resolve=> require(["../page/admin/menu/pushset/pushset.vue"],resolve),
+                    meta: { title: "桌面通知"},
                 },
                 {
                     path: "/reviewste",
