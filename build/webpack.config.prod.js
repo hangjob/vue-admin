@@ -26,9 +26,10 @@ module.exports = webpackMerge(baseConfg,{
     optimization: {
         minimizer: [
             new UglifyJsPlugin({
+                exclude: /\.main\.js$/, //过滤某个main.js文件
                 cache: true,
                 parallel: true, //启用缓存并且启用多进程并行运行
-                sourceMap: true,  //错误消息位置映射(减慢编译速度)，线上错误调试方便
+                sourceMap: false,  //错误消息位置映射(减慢编译速度)，线上错误调试方便
                 uglifyOptions: {
                     compress: false
                 }

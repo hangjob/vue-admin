@@ -11,8 +11,6 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
-
 const entry = {};
 const plugins = [];
 
@@ -127,9 +125,7 @@ const baseConfg = {
                 to: "/static", // 打包后静态文件放置位置
                 ignore: [".*"] // 忽略规则。（这种写法表示将该文件夹下的所有文件都复制）
             }
-        ]),
-
-        new UglifyJSPlugin()
+        ])
     ]),
     resolve:{
         alias:{

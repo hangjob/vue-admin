@@ -26,9 +26,9 @@ export default new VueRouter({
                     meta: { title: "网页预览"},
                 },
                 {
-                    path: "/imgste",
-                    component: resolve=> require(["../page/admin/menu/imgste/imgste.vue"],resolve),
-                    meta: { title: "图片预览"},
+                    path: "/btnste",
+                    component: resolve=> require(["../page/admin/menu/btnste/btnste.vue"],resolve),
+                    meta: { title: "按钮预览"},
                 },
                 {
                     path: "/blockste",

@@ -16,8 +16,8 @@ const routers =  [
                 title: "网页预览"
             },
             {
-                index: "/imgste",
-                title: "图片预览"
+                index: "/btnste",
+                title: "按钮预览"
             },
             {
                 index: "/blockste",
