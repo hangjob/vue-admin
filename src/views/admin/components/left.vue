@@ -6,22 +6,22 @@
                 <li v-for="item,i in menus" :key="i">
                     <div :class="['level','level-one','flex-center',{active:active === i}]" @click="clickActive(item.index,menus[i],i)">
                         <div><i :class="['fa','ft10','ft-gray',item.icon]"></i></div>
-                        <div><span class="ft8 ft-gray">{{item.title}}</span></div>
-                        <div><i v-if="item.children && item.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i></div>
+                        <div><span class="ft14 ft-gray">{{item.title}}</span></div>
+                        <div><i v-if="item.children && item.children.length != 0" class="fa fa-caret-down ft14 ft-gray"></i></div>
                     </div>
                     <transition name="bounce">
                         <ul class="level-two" v-show="item.shows && item.children && item.children.length != 0">
                             <li v-for="chid,j in item.children" :key="j">
                                 <div @click="clickActive(chid.index,menus[i].children[j],''+i+j)" :class="['level-two-name','flex-center',{active:active == ''+i+j}]">
-                                    <span class="ft8 ft-gray flex1">{{chid.title}}</span>
-                                    <i v-if="chid.children && chid.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i>
+                                    <span class="ft14 ft-gray flex1">{{chid.title}}</span>
+                                    <i v-if="chid.children && chid.children.length != 0" class="fa fa-caret-down ft14 ft-gray"></i>
                                 </div>
                                 <transition name="bounce">
                                     <ul class="level-three" v-show="chid.shows && chid.children && chid.children.length != 0" >
                                         <li v-for="son,k in chid.children" :key="k">
                                             <div :class="['level-two-name','flex-center',{active:active == ''+i+j+k}]" @click="clickActive(son.index,menus[i].children[j].children[k],''+i+j+k)">
-                                                <span class="ft8 ft-gray flex1">{{son.title}}</span>
-                                                <i v-if="son.children && son.children.length != 0" class="fa fa-caret-down ft8 ft-gray"></i>
+                                                <span class="ft14 ft-gray flex1">{{son.title}}</span>
+                                                <i v-if="son.children && son.children.length != 0" class="fa fa-caret-down ft14 ft-gray"></i>
                                             </div>
                                         </li>
                                     </ul>
@@ -65,8 +65,8 @@ export default {
     background-color: #1a293c;
     color: #ffffff;
     .title{
-        height: 50px;
-        line-height: 50px;
+        height: 60px;
+        line-height: 60px;
         text-align: center;
     }
     li{
@@ -85,7 +85,7 @@ export default {
         transform: rotate(180deg)
     }
     .level{
-        padding: 10px 0;
+        padding: 20px 0;
         border-bottom: 1px solid #21344b;
     }
     .level-one > div:first-child{
@@ -102,18 +102,14 @@ export default {
         padding-right: 10px;
     }
     .level-two .level-two-name{
-        padding: 10px 0;
+        padding: 15px 0;
     }
     .level-three{
-        padding-left: 0.50rem;
         background: #0e1a2a;
-        margin-right: -0.1rem;
-        padding-right: .1rem;
-        margin-left: -0.40rem;
         overflow: hidden;
     }
-    .level-three > div{
-        margin: 15px 0;
+    .level-three .level-two-name{
+        margin-left: 15px;
     }
     .level-one > div:last-child{
         flex: 1;

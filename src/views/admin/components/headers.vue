@@ -50,7 +50,7 @@ export default {
     position: relative;
 }
 .headers{
-    height: 35px;
+    height: 60px;
     background-color: #ffffff;
     padding: 0 1%;
     display: flex;
@@ -62,7 +62,7 @@ export default {
         flex: 1;
         .item{
             div{
-                font-size: 10px;
+                font-size: 14px;
             }
         }
     }
@@ -72,13 +72,13 @@ export default {
         align-items: center;
         height: 100%;
         & div{
-            margin-left:20px;
+            margin-left:40px;
             position: relative;
             cursor: pointer;
             display: flex;
             i{
                 color: #9c9c9c;
-                font-size: 17px;
+                font-size: 24px;
             }
             span{
                 border-radius: 50%;
@@ -110,8 +110,8 @@ export default {
 }
 .box-headers .rest{
     position: absolute;
-    top: 35px;
-    right: 0px;
+    top: 61px;
+    right: 3px;
     background-color: #ffffff;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;

@@ -1,6 +1,6 @@
 <template>
     <div class="number">
-        <div class="ft8 title">{{title}}</div>
+        <div class="ft14 title">{{title}}</div>
         <div class="num">
             <count-to :start-val='0' :end-val='endVal' prefix='¥ ' :duration='duration'></count-to>
         </div>

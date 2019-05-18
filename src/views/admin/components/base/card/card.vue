@@ -2,8 +2,8 @@
     <section class="card">
         <div class="top">
             <slot name="top">
-                <div class="icon"><i class="fa fa-gg-circle ft10"></i></div>
-                <div class="title"><span class="ft10">{{title}}</span></div>
+                <div class="icon"><i class="fa fa-gg-circle ft14"></i></div>
+                <div class="title"><span class="ft14">{{title}}</span></div>
             </slot>
         </div>
         <div class="center clearfix">

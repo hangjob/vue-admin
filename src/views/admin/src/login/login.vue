@@ -46,7 +46,7 @@ export default {
         background-repeat: no-repeat;
         background-size:cover;
         .login-admin{
-            padding: 60px 50px 50px 50px;
+            padding: 120px 60px;
             display: inline-block;
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
@@ -54,16 +54,17 @@ export default {
             overflow: hidden;
             position: absolute;
             left: 15%;
-            top: 23%;
+            top: 21%;
             // transform: translate(-50%, -50%);
             >div {
                 display: flex;
                 flex-direction: column;
+                min-width: 300px;
             }
             .title{
-                margin-bottom: 20px;
+                margin-bottom: 40px;
                 h3{
-                    font-size: 16px;
+                    font-size: 20px;
                     color: #333333;
                 }
                 p{
@@ -75,9 +76,9 @@ export default {
                 display: flex;
                 border-bottom: 1px solid #b9b9b9;
                 align-items: center;
-                justify-content: center;
-                margin-bottom: 20px;
+                margin-bottom: 30px;
                 padding: 5px 1px;
+                font-size: 17px;
                 .icon{
                     margin-right: 6px;
                 }
@@ -86,7 +87,8 @@ export default {
                 // http://www.colorzilla.com/gradient-editor/ 在线渐变色
                 width: 100%;
                 text-align: center;
-                padding: 7px 0;
+                padding: 10px 0;
+                font-size: 14px;
                 background: #f1cf75; /* Old browsers */
                 background: -moz-linear-gradient(left, #f1cf75 0%, #cd8f90 100%); /* FF3.6-15 */
                 background: -webkit-linear-gradient(left, #f1cf75 0%,#cd8f90 100%); /* Chrome10-25,Safari5.1-6 */
