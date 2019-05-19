@@ -24,8 +24,8 @@ const routers =  [
                 title: "桌面通知"
             },
             {
-                index: "/reviewste",
-                title: "评论管理"
+                index: "/scroll",
+                title: "滚动加载"
             }
         ]
     },

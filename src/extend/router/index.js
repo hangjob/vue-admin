@@ -36,9 +36,9 @@ export default new VueRouter({
                     meta: { title: "桌面通知"},
                 },
                 {
-                    path: "/itste",
-                    component: resolve=> require(["../../views/admin/src/site/site.vue"],resolve),
-                    meta: { title: "网址管理"},
+                    path: "/scroll",
+                    component: resolve=> require(["../../views/admin/src/scroll/scroll.vue"],resolve),
+                    meta: { title: "滚动加载"},
                 },
                 {
                     path: "/itstair",
