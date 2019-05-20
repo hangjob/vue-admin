@@ -17,7 +17,7 @@ export default new VueRouter({
             children:[
                 {
                     path: "/home",
-                    component: resolve=> require(["../../views/admin/src/home/home.vue"],resolve),
+                    component: resolve=> require(["../../views/admin/src/site/site.vue"],resolve),
                     meta: { title: "系统首页"},
                 },
                 {
@@ -48,6 +48,11 @@ export default new VueRouter({
                 {
                     path: "/twostair",
                     component: resolve=> require(["../../views/admin/src/site/site.vue"],resolve),
+                    meta: { title: "二级分类"},
+                },
+                {
+                    path: "/charts",
+                    component: resolve=> require(["../../views/admin/src/charts/charts.vue"],resolve),
                     meta: { title: "二级分类"},
                 },
             ]

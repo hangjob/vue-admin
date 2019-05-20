@@ -26,6 +26,10 @@ const routers =  [
             {
                 index: "/scroll",
                 title: "滚动加载"
+            },
+            {
+                index: "/charts",
+                title: "图表管理"
             }
         ]
     },

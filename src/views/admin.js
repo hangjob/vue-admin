@@ -13,6 +13,9 @@ import "iview/dist/styles/iview.css";
 import "./admin/css/style.less";
 Vue.use(iView);
 
+import VCharts from 'v-charts'
+Vue.use(VCharts)
+
 Vue.config.productionTip = false
 
 // 通过路由钩子函数判断做出你响应的业务需求
