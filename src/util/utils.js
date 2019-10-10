@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 /**
  * currentStyle属性和getComputedStyle属性不能设置属性,只能获取
  *currentStyle:该属性只兼容IE,不兼容火狐和谷歌
@@ -62,4 +64,22 @@ export function debounce(func, delay) {
             func.apply(this, args);
         }, delay);
     };
+}
+
+
+/**
+ * 设置token
+ * @param {*} token 
+ */
+export const setToken = (token) => {
+    sessionStorage.setItem('token',token)
+}
+
+/**
+ * 获取token
+ */
+export const getToken = () => {
+    const token = sessionStorage.getItem('token')
+    if (token) return token
+    else return false
 }

@@ -1,4 +1,5 @@
 const multiple = require("./pages.js");
+console.log(multiple)
 // "build": "vue-cli-service build --mode test", 修改打包命令
 // https://suyi123.com/2018/11/01/vue-cli-3-%E5%A4%9A%E9%A1%B5%E5%BA%94%E7%94%A8%E4%B8%8E%E5%88%86%E5%8C%85/ 分包加载
 const path = require('path');
@@ -15,7 +16,7 @@ module.exports = {
     productionSourceMap: false, //设为false打包时不生成.map文件
     // 打包时用第三方cdn
     configureWebpack: config => {
-        if (isProd) {
+        if (isProd==='production') {
             config.externals = {
                 vue: 'Vue',
                 'vue-router': 'VueRouter',
@@ -33,7 +34,7 @@ module.exports = {
         'style-resources-loader': {
             preProcessor: 'less',
             patterns: [resolve('src/style/admin.less')] 
-      }
+        }
     },
     // 设置请求代理
     devServer: {
