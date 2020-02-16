@@ -1,24 +1,34 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-10-02 23:53:00
+ * @LastEditTime: 2020-02-16 17:33:12
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue-admin\README.md
+ -->
 # vue-cli-pages
 
-## Project setup
+### 动态添加路由
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 第一步执行 
+在根目录下执行服务，好模拟请求接口数据
 ```
-npm run serve
+node server.js 
 ```
 
-### Compiles and minifies for production
+### 第二步执行
+```
+npm run dev
+```
+
+### 打包
 ```
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 需要了解更多
+[加入我们](https://www.vipbic.com/weixin.html)
+[www.vipbic.com](https://www.vipbic.com/)
