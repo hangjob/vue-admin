@@ -2,7 +2,7 @@
  * @Author: your name
  * @Date: 2020-02-11 18:02:51
  * @LastEditTime : 2020-02-11 23:28:59
- * @LastEditors  : Please set LastEditors
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-admin\src\views\admin\src\layout\main.vue
  -->
@@ -12,7 +12,9 @@
             <sidebar></sidebar>
         </section>
         <section class="main-right">
-            <div class="main-right-head">顶部</div>
+            <div class="main-right-head">
+                <rightHead></rightHead>
+            </div>
             <div class="main-right-container">
                 <div class="app-main">
                     <router-view></router-view>
@@ -23,9 +25,11 @@
 </template>
 <script>
 import sidebar from './sidebar.vue'
+import rightHead from './header.vue'
 export default {
     components:{
-        sidebar
+        sidebar,
+        rightHead
     }
 }
 </script>
@@ -75,6 +79,7 @@ export default {
             margin-top: 90px;
             .app-main{
                 background-color: #ffffff;
+                padding: 10px;
             }
         }
     }

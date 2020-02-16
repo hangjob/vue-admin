@@ -8,7 +8,7 @@
  -->
 <template>
     <div>
-        realtime
+        {{$route.path.replace()}}
     </div>   
 </template>
 <script>

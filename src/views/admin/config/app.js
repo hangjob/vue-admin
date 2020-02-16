@@ -9,7 +9,7 @@
 const defaultErr = {
     path: "*",
     component: resolve => require(["@/views/admin/src/error/404.vue"], resolve),
-    meta: { title: "404", icon: 'logo-xbox', shows: true },
+    meta: { title: "404", icon: 'logo-xbox', shows: false },
 };
 const app = {
     SUCCESS_CODE: 1, // 后台成功的code

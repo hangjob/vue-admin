@@ -2,7 +2,7 @@
  * @Author: your name
  * @Date: 2019-10-10 21:18:32
  * @LastEditTime : 2020-02-14 23:39:31
- * @LastEditors  : Please set LastEditors
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-admin\src\views\admin\admin.js
  */
@@ -21,10 +21,12 @@ Vue.prototype.$http = types
 import utils from '@/util/utils.js'
 Vue.prototype.$utils = utils
 
-// 使用ViewUI
-import ViewUI from 'view-design';
-import 'view-design/dist/styles/iview.css';
-Vue.use(ViewUI);
+// 使用ElementUI
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
+
 
 import VCharts from 'v-charts'
 Vue.use(VCharts)

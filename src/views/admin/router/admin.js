@@ -10,14 +10,16 @@
 // 默认路由
 const defaultRouter = [{
         path: "/",
+        name: "index",
         redirect: "/main",
-        meta: { title: "main", icon: 'md-analytics', shows: false }
+        meta: { title: "main", icon: 'md-analytics', shows: false },
     },
     {
         path: "/main",
         name: "main",
         component: resolve => require(["@/views/admin/src/layout/main.vue"], resolve),
         meta: { title: "主页", icon: 'md-analytics', shows: true },
+        children: []
     },
     {
         path: "/login",

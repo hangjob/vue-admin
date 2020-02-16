@@ -2,13 +2,13 @@
  * @Author: your name
  * @Date: 2020-02-13 22:37:27
  * @LastEditTime: 2020-02-13 22:37:36
- * @LastEditors: your name
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-admin\src\views\admin\src\financial\index.vue
  -->
 <template>
     <div>
-        financial
+        {{$route.path.replace()}}
     </div>   
 </template>
 <script>

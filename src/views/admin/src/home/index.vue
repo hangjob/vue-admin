@@ -1,6 +1,6 @@
 <template>
     <div>
-        home
+        {{$route.path.replace()}}
     </div>   
 </template>
 <script>

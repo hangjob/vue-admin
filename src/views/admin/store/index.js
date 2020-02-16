@@ -9,6 +9,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import VueRouter from '../router'
+import { defaultRouter } from '../router/admin'
 import { getRole, getUserinfo } from '@/views/admin/http/api'
 import app from '../config/app'
 
@@ -26,8 +27,9 @@ export default new Vuex.Store({
     mutations: {
         setMenuList(state, menus) {
             state.menuList = menus;
-            VueRouter.addRoutes(menus); // 添加到vue-router中
-            VueRouter.options.routes = VueRouter.options.routes.concat(menus) // 解决组件中 this.$router.options.routes 获取不到新添加的router
+            defaultRouter[1].children = menus;
+            VueRouter.addRoutes(defaultRouter); // 添加到vue-router中
+            // VueRouter.options.routes = VueRouter.options.routes.concat(defaultRouter) // 解决组件中 this.$router.options.routes 获取不到新添加的router
         },
         setUserInfo(state, user) {
             state.userInfo = user;

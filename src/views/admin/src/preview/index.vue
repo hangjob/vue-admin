@@ -1,6 +1,6 @@
 <template>
     <div>
-        preview
+        {{$route.path.replace()}}
     </div>   
 </template>
 <script>

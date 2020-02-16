@@ -7,41 +7,40 @@
  * @FilePath: \vue-admin\src\views\admin\src\layout\sidebar.vue
  -->
 <template>
-    <div class="sidebar">
-        <div class="sidebar-user">
+    <div class="sidebars">
+        <div class="sidebars-user">
             <div class="img"><img src="https://www.vipbic.com/uploads/20190321/e561b9dbf43336c22e277169027c8add.jpg"></div>
             <div class="name">vipbic</div>
             <div class="title">团队管理员</div>
         </div>
         <div class="scrollbar">
-            <div class="sidebar-menu">
-                <template v-for="(menuItem,index) in list">
-                    <my-tree :model="menuItem"  v-if="menuItem.meta.shows" :key="index"></my-tree>
-                </template>
+            <div class="sidebars-menu">
+               <treeMenus></treeMenus>
             </div>
         </div>
     </div>    
 </template>
 <script>
-import myTree from './item.vue'
+import treeMenus from './treeMenus.vue'
 export default {
     data(){
         return {
-            list:[],
-            active:''
+            shop:''
         }
     },
     components:{
-        myTree
+        treeMenus
     },
     created(){
-        this.list = this.$router.options.routes;
-        console.log(this.$router)
+        
+    },
+    mounted(){
+      
     }
 }
 </script>
-<style lang="less" scoped>
-.sidebar{
+<style lang="less">
+.sidebars{
     padding-top: 50px;
     height: 100%;
     box-sizing: border-box;
@@ -51,6 +50,7 @@ export default {
         justify-content: center;
         align-items: center;
         height:200px;
+        padding-bottom:20px;
         .img{
             width: 120px;
             height: 120px;
@@ -83,21 +83,13 @@ export default {
     &-menu{
         overflow: scroll;
         overflow-x: hidden!important;
-        height: calc(100% - 200px);
+        height: calc(100% - 220px);
         &::-webkit-scrollbar {
-            width : 6px;
+            width : 0px;
             height: 1px;
         }
-        &::-webkit-scrollbar-thumb {
-            border-radius   : 10px;
-            background-color: #f1f5f7;
-            // 渐变色
-            background-image: -webkit-linear-gradient(45deg,rgba(255, 255, 255, 0.2) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, 0.2) 50%,rgba(255, 255, 255, 0.2) 75%,transparent 75%,transparent);
-        }
-        &::-webkit-scrollbar-track {
-            box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0);
-            background   : #ffffff;
-            border-radius: 10px;
+        .el-menu{
+            border-right:0
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        certification
+        {{$route.path.replace()}}
     </div>   
 </template>
 <script>
