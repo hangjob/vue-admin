@@ -6,9 +6,9 @@
  * @Description: In User Settings Edit
  * @FilePath: \vue-admin\README.md
  -->
-# vue-cli-pages
+# 动态添加路由
 
-### 动态添加路由
+### 安装依赖
 ```
 npm install
 ```
@@ -30,5 +30,5 @@ npm run build
 ```
 
 ### 需要了解更多
-[加入我们](https://www.vipbic.com/weixin.html)
+[加入我们](https://www.vipbic.com/weixin.html)<br>
 [www.vipbic.com](https://www.vipbic.com/)
