@@ -9,12 +9,15 @@
 <template>
     <div class="main">
         <section class="main-left">
+            <!-- 左边菜单 -->
             <sidebar></sidebar>
         </section>
         <section class="main-right">
+            <!-- 右边头部 -->
             <div class="main-right-head">
                 <rightHead></rightHead>
             </div>
+            <!-- 右边内容 -->
             <div class="main-right-container">
                 <div class="app-main">
                     <router-view></router-view>

@@ -21,7 +21,7 @@ app.use('*', function(req, res, next) {    
 app.get('/role', (req, res) => {    
     res.json({        
         menus: [            
-            {  id: 1, sort: 1, path: '/preview', component: 'views/admin/src/preview/index', meta: { title: "数据分析", icon: 'el-icon-grape', shows: true }, pid: '' },
+            {  id: 1, sort: 1, path: '/home', component: 'views/admin/src/home/index', meta: { title: "首页", icon: 'el-icon-grape', shows: true }, pid: '' },
             {  id: 2, sort: 8, path: '/financial', component: 'views/admin/src/financial/index', meta: { title: "财务管理", icon: 'el-icon-refrigerator', shows: true }, pid: '' },
             {  id: 3, sort: 1, path: '/certification', component: 'views/admin/src/certification/index', meta: { title: "认证资质", icon: 'el-icon-watermelon', shows: true }, pid: '' },
             {  id: 4, sort: 1, path: '/integrated', component: 'views/admin/src/integrated/index', meta: { title: "综合管理", icon: 'el-icon-cherry', shows: true }, pid: '' } ,

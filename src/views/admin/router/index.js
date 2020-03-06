@@ -33,7 +33,7 @@ router.beforeEach(async(to, from, next) => {
         }
         if (to.name === 'login') {
             next({
-                path: '/main',
+                path: '/home',
             })
         } else {
             next()

@@ -8,9 +8,9 @@
  -->
 <template>
     <div>
-        <Input v-model="name" placeholder="Enter something..."/>
-        <Input v-model="pas" placeholder="Enter something..." />
-        <Button type="success" long @click="btnLogin">登录</Button>
+        <el-input v-model="name" placeholder="请输入内容"></el-input>
+        <el-input v-model="pas" placeholder="请输入内容"></el-input>
+        <el-button type="primary" @click="btnLogin">登录</el-button>
     </div>   
 </template>
 <script>
@@ -18,8 +18,8 @@ import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
     data(){
         return {
-            name:'',
-            pas:''
+            name:'123456',
+            pas:'123456'
         }
     },
     methods:{
@@ -32,7 +32,7 @@ export default {
             if(userInfo && userInfo.name){
                 let menuList = await this.getMenuList();
                 if(menuList){
-                    this.$router.push({name:'main'})
+                    this.$router.push({path:'/home'})
                 }else{
                     console.log('出错提示')
                 }
@@ -42,5 +42,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-
+button{
+    width:100%;
+}
 </style>
