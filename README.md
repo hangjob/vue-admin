@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-10-02 23:53:00
- * @LastEditTime: 2020-02-16 17:33:12
+ * @LastEditTime: 2020-04-28 22:24:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-admin\README.md
@@ -11,15 +11,11 @@
 ### 安装依赖
 ```
 npm install
+或者
+cnpm install
 ```
 
-### 第一步执行 
-在根目录下执行服务，好模拟请求接口数据
-```
-node server.js 
-```
-
-### 第二步执行
+### 开发模式 
 ```
 npm run dev
 ```
