@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-04-28 22:15:28
+ * @LastEditTime: 2020-04-28 22:28:28
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \admin\vue-admin\src\router\index.js
+ */
 import Vue from 'vue';
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
@@ -26,7 +34,8 @@ const router = new VueRouter({
     }
 })
 
-const selfaddRoutes = function (params) {
+// 清除重复添加警告  https://www.cnblogs.com/fqh123/p/11571688.html
+const selfaddRoutes = function(params) {
     router.matcher = new VueRouter().matcher;
     router.addRoutes(params);
 }
