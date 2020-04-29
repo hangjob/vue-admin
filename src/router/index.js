@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2020-04-28 22:15:28
- * @LastEditTime: 2020-04-28 22:28:28
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \admin\vue-admin\src\router\index.js
- */
 import Vue from 'vue';
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
@@ -29,20 +21,20 @@ const router = new VueRouter({
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve({ x: 0, y: 0 })
-            }, 500)
+            }, 200)
         })
     }
 })
 
-// 清除重复添加警告  https://www.cnblogs.com/fqh123/p/11571688.html
-const selfaddRoutes = function(params) {
+// 消除路由重复警告
+const selfaddRoutes = function (params) {
     router.matcher = new VueRouter().matcher;
     router.addRoutes(params);
 }
 
 router.beforeEach((to, from, next) => {
-    console.log(store.state.hasRoute);
-    if (store.state.hasRoute) {
+    const { hasRoute } = store.state;
+    if (hasRoute) {
         next()
     } else {
         addPostRouter(to, from, next, selfaddRoutes)

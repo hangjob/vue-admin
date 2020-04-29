@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import axios from "axios";
 import merge from 'lodash/merge'
 import qs from 'qs'
@@ -9,7 +8,7 @@ import qs from 'qs'
  */
 const http = axios.create({
     timeout: 1000 * 30,
-    withCredentials: false, // 表示跨域请求时是否需要使用凭证
+    withCredentials: true, // 表示跨域请求时是否需要使用凭证
 });
 
 /**
@@ -26,7 +25,8 @@ http.interceptors.request.use(function (config) {
  * 响应拦截
  */
 http.interceptors.response.use(response => {
-    if (response.data && (response.data.code === 401)) { // 过期之类的操作
+    // 过期之类的操作
+    if (response.data && (response.data.code === 401)) {
         // window.location.href = ''; 重定向
     }
     return response
@@ -149,21 +149,4 @@ http.upLoadPhoto = function (url, params, callback) {
             })
     })
 }
-
-
-/**
- * 并发请求
- */
-http.requestAll = function (arr) {
-    return new Promise((resolve, reject) => {
-        http.all(arr)
-            .then(axios.spread(function (...arr) {
-               console.log(arguments)
-            }))
-            .catch(error => {
-                reject(error)
-            })
-    })
-}
-
 export default http;
