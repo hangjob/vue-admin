@@ -1,6 +1,7 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin') // 去掉注释
 const CompressionWebpackPlugin = require('compression-webpack-plugin'); // 开启压缩
+const { HashedModuleIdsPlugin } = require('webpack');
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -102,6 +103,12 @@ module.exports = {
                     minRatio: 0.8 // 压缩比
                 })
             )
+            
+            // 用于根据模块的相对路径生成 hash 作为模块 id, 一般用于生产环境
+            plugins.push(
+                new HashedModuleIdsPlugin()
+            )
+
             // 开启分离js
             config.optimization = {
                 runtimeChunk: 'single',
