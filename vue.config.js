@@ -72,11 +72,15 @@ module.exports = {
             }
             return args
         })
+        
+        config
+            .plugin('webpack-bundle-analyzer')
+            .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
     },
 
     configureWebpack: config => {
         const plugins = [];
-        
+
         if (isProduction) {
             plugins.push(
                 new UglifyJsPlugin({
@@ -103,7 +107,7 @@ module.exports = {
                     minRatio: 0.8 // 压缩比
                 })
             )
-            
+
             // 用于根据模块的相对路径生成 hash 作为模块 id, 一般用于生产环境
             plugins.push(
                 new HashedModuleIdsPlugin()
