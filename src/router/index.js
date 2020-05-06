@@ -1,9 +1,17 @@
+/*
+ * @Author: your name
+ * @Date: 2020-04-29 21:32:37
+ * @LastEditTime: 2020-04-29 22:05:40
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \vue-admin\src\router\index.js
+ */
 import Vue from 'vue';
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import defaultRouter from './defaultRouter'
-import addPostRouter from './dynamicRouter';
+import dynamicRouter from './dynamicRouter';
 
 import store from '@/store';
 
@@ -27,7 +35,7 @@ const router = new VueRouter({
 })
 
 // 消除路由重复警告
-const selfaddRoutes = function (params) {
+const selfaddRoutes = function(params) {
     router.matcher = new VueRouter().matcher;
     router.addRoutes(params);
 }
@@ -37,7 +45,7 @@ router.beforeEach((to, from, next) => {
     if (hasRoute) {
         next()
     } else {
-        addPostRouter(to, from, next, selfaddRoutes)
+        dynamicRouter(to, from, next, selfaddRoutes)
     }
 })
 

@@ -43,10 +43,10 @@ const cdn = {
 
 module.exports = {
 
-    lintOnSave: false,
+    lintOnSave: false, // 关闭eslint
     productionSourceMap: false,
     publicPath: './',
-    outputDir: process.env.outputDir,
+    outputDir: process.env.outputDir, // 生成文件的目录名称
     chainWebpack: config => {
 
         config.resolve.alias
@@ -72,7 +72,7 @@ module.exports = {
             }
             return args
         })
-        
+
         config
             .plugin('webpack-bundle-analyzer')
             .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
@@ -83,25 +83,25 @@ module.exports = {
 
         if (isProduction) {
             plugins.push(
-                new UglifyJsPlugin({
-                    uglifyOptions: {
-                        output: {
-                            comments: false, // 去掉注释
-                        },
-                        warnings: false,
-                        compress: {
-                            drop_console: true,
-                            drop_debugger: false,
-                            pure_funcs: ['console.log']//移除console
+                    new UglifyJsPlugin({
+                        uglifyOptions: {
+                            output: {
+                                comments: false, // 去掉注释
+                            },
+                            warnings: false,
+                            compress: {
+                                drop_console: true,
+                                drop_debugger: false,
+                                pure_funcs: ['console.log'] //移除console
+                            }
                         }
-                    }
-                })
-            )
-            // 服务器也要相应开启gzip
+                    })
+                )
+                // 服务器也要相应开启gzip
             plugins.push(
                 new CompressionWebpackPlugin({
                     algorithm: 'gzip',
-                    test: /\.(js|css)$/,// 匹配文件名
+                    test: /\.(js|css)$/, // 匹配文件名
                     threshold: 10000, // 对超过10k的数据压缩
                     deleteOriginalAssets: false, // 不删除源文件
                     minRatio: 0.8 // 压缩比
@@ -141,7 +141,7 @@ module.exports = {
                 //生成文件的最大体积
                 maxAssetSize: 1000 * 1000,
                 //只给出 js 文件的性能提示
-                assetFilter: function (assetFilename) {
+                assetFilter: function(assetFilename) {
                     return assetFilename.endsWith('.js');
                 }
             }
@@ -169,8 +169,8 @@ module.exports = {
         proxy: {
             '^/sso': {
                 target: process.env.VUE_APP_SSO, // 重写路径
-                ws: true,   //开启WebSocket
-                secure: false,      // 如果是https接口，需要配置这个参数
+                ws: true, //开启WebSocket
+                secure: false, // 如果是https接口，需要配置这个参数
                 changeOrigin: true
             }
         }
