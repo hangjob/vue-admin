@@ -25,7 +25,7 @@ npm run publish
 npm run build
 ```
 
-### 包含功能
+### 项目配置功能
 1. 配置全局cdn，包含js、css
 2. 开启Gzip压缩，包含文件js、css
 3. 去掉注释、去掉console.log
@@ -39,6 +39,10 @@ npm run build
 11. 配置全局less
 12. 只打包改变的文件
 13. 开启分析打包日志
+14. 拷贝文件
+
+### 附加功能
+1. vue如何刷新当前页面
 
 ### 目录结构
 ```shell
@@ -65,34 +69,52 @@ npm run build
 
 ### html模板配置cdn
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <% for (var i in
-        htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.css) { %>
+<% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.css) { %>
     <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="preload" as="style" />
     <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
-    <% } %>
-</head>
+<% } %>
 
-<body>
-    <noscript>
-        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
-            Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-    <% for (var i in
-        htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
+<% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
     <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
-    <% } %>
-</body>
-</html>
+<% } %>
+
+```
+```js
+// cdn预加载使用
+const externals = {
+    'vue': 'Vue',
+    'vue-router': 'VueRouter'
+}
+const cdn = {
+    // 开发环境
+    dev: {
+        css: [
+            'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
+        ],
+        js: []
+    },
+    // 生产环境
+    build: {
+        css: [
+            'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
+        ],
+        js: [
+            'https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js',
+            'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js'
+        ]
+    }
+}
+chainWebpack: config => {
+    config.plugin('html').tap(args => {
+        if (process.env.NODE_ENV === 'production') {
+            args[0].cdn = cdn.build
+        }
+        if (process.env.NODE_ENV === 'development') {
+            args[0].cdn = cdn.dev
+        }
+        return args
+    })
+}
 ```
 
 ### 开启Gzip压缩，包含文件js、css
@@ -185,7 +207,7 @@ devServer: {
     ]
 }
 ```
-如果还没请客官移步[在vscode中使用别名@按住ctrl也能跳转对应路径](https://www.vipbic.com/thread.html?id=88)
+如果还没看懂的客官请移步[在vscode中使用别名@按住ctrl也能跳转对应路径](https://www.vipbic.com/thread.html?id=88)
 
 ### 配置环境变量开发模式、测试模式、生产模式
 在根目录新建
@@ -281,4 +303,56 @@ chainWebpack: config => {
 		.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
 }
 ```
+
+### 拷贝文件
+安装`npm i copy-webpack-plugin -D`
+```js
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+configureWebpack: config => {
+    const plugins = [];
+     plugins.push(
+        new CopyWebpackPlugin([{ from: './NLwdLAxhwv.txt'}])
+    )
+}
+```
+from为文件的路径，还有一个to属性是输出的文件夹路径，不写则默认复制到打包后文件的根目录
+
+### vue如何刷新当前页面
+刷新当前页面适合在只改变了路由的id的页面，比如查看详情页面，当路由id发生时候，并不会去触发当前页面的钩子函数
+查看`App.vue`
+```js
+<template>
+	<div class="app">
+        <router-view v-if="isRouterAlive"></router-view>
+    </div>
+</template>
+<script>
+export default {
+	name: "App",
+	provide() {
+		return {
+			reload: this.reload
+		};
+	},
+	data() {
+		return {
+			isRouterAlive: true
+		};
+	},
+	methods: {
+        // 重载页面 适合添加数据或者路由id改变
+		reload() {
+			this.isRouterAlive = false;
+			this.$nextTick(()=>{
+                this.isRouterAlive = true;
+            });
+		}
+	}
+};
+</script>
+```
+然后其它任何想刷新自己的路由页面，都可以这样: `this.reload()`
+
 ### 如有疑问
+可以加群一起讨论关于vue-cli打包编译的见解，你的一个小小的改动就是一个大的进步
+![vue.config.js交流圈](https://i.loli.net/2020/05/09/FqnSDvCYgsrzK6N.jpg)

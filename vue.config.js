@@ -2,6 +2,7 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin') // 去掉注释
 const CompressionWebpackPlugin = require('compression-webpack-plugin'); // 开启压缩
 const { HashedModuleIdsPlugin } = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -111,6 +112,11 @@ module.exports = {
             // 用于根据模块的相对路径生成 hash 作为模块 id, 一般用于生产环境
             plugins.push(
                 new HashedModuleIdsPlugin()
+            )
+            
+            // 拷贝文件到指定目录，比如一些网站在根目录需要验证某些文本， from为文件的路径，还有一个to属性是输出的文件夹路径，不写则默认复制到打包后文件的根目录
+            plugins.push(
+                new CopyWebpackPlugin([{ from: './NLwdLAxhwv.txt'}])
             )
 
             // 开启分离js
