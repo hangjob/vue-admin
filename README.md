@@ -1,5 +1,9 @@
 # 一份完整的vue-cli3项目基础配置项
 
+### 网站例子
+
+[vipbic是一个专注前端开发、网址导航、社区讨论综合网站](https://www.vipbic.com/)
+
 ## 安装依赖
 ```
 cnpm install
@@ -40,6 +44,8 @@ npm run build
 12. 只打包改变的文件
 13. 开启分析打包日志
 14. 拷贝文件
+15. 添加可选链运算符
+16. 配置px转换rem
 
 ### 附加功能
 1. vue如何刷新当前页面
@@ -316,6 +322,71 @@ configureWebpack: config => {
 }
 ```
 from为文件的路径，还有一个to属性是输出的文件夹路径，不写则默认复制到打包后文件的根目录
+
+### 可选链运算符
+安装依赖
+```js
+cnpm install  @babel/plugin-proposal-optional-chaining -S
+```
+在babel.config.js中  的 plugins中添加 "@babel/plugin-proposal-optional-chaining"
+```js
+module.exports = {
+    presets: [
+        '@vue/cli-plugin-babel/preset'
+    ],
+    plugins: [
+        '@babel/plugin-proposal-optional-chaining'
+    ]
+}
+```
+测试
+```js
+    const obj = {
+        foo: {
+            bar: {
+                baz: 42,
+                fun: () => {
+                    return 666;
+                }
+            }
+        }
+    };
+    let baz = obj?.foo?.bar?.baz;
+    let fun = obj?.foo?.bar?.fun();
+    console.log(baz); // 42
+    console.log(fun) // 666
+```
+
+### 配置px转换rem
+安装
+```js
+cnpm i lib-flexible -S
+cnpm i postcss-pxtorem -D
+```
+入口js
+```js
+import 'lib-flexible/flexible.js'
+```
+如果不需要转rem，注释即可，也不要引入flexible.js
+```js
+css: {
+    loaderOptions: {
+        postcss: {
+            plugins: [
+                require('postcss-pxtorem')({
+                    rootValue : 75, // 换算的基数 1rem = 75px 这个是根据750px设计稿来的，如果是620 的就写 62
+                    // 忽略转换正则匹配项。插件会转化所有的样式的px。比如引入了三方UI，也会被转化。目前我使用selectorBlackList字段，来过滤
+                    //如果个别地方不想转化px。可以简单的使用大写的 PX 或 Px 。
+                    selectorBlackList  : ['weui','mu'], //
+                    propList : ['*'], // 需要做转化处理的属性，如`hight`、`width`、`margin`等，`*`表示全部
+                })
+            ]
+        }
+    }
+}
+```
+
+
 
 ### vue如何刷新当前页面
 刷新当前页面适合在只改变了路由的id的页面，比如查看详情页面，当路由id发生时候，并不会去触发当前页面的钩子函数

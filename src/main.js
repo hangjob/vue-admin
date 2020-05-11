@@ -2,7 +2,7 @@ import Vue from '../entrance';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-
+import 'lib-flexible/flexible.js'
 // 加载全局组件
 import './components';
 

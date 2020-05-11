@@ -10,10 +10,12 @@
     "publish": "vue-cli-service build && vue-cli-service build --mode test"
   },
   "dependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "element-ui": "^2.13.1",
     "jquery": "^3.5.0",
+    "lib-flexible": "^0.3.2",
     "lodash": "^4.17.15",
     "qs": "^6.9.3",
     "vue": "^2.6.11",
@@ -33,7 +35,8 @@
     "less": "^3.11.1",
     "less-loader": "^6.0.0",
     "mockjs": "^1.1.0",
-    "style-resources-loader": "^1.3.2",
+    "postcss-pxtorem": "^5.1.1",
+    "style-resources-loader": "^1.3.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "vue-cli-plugin-style-resources-loader": "~0.1.4",
     "vue-template-compiler": "^2.6.11",
