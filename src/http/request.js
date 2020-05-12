@@ -2,6 +2,8 @@ import axios from "axios";
 import merge from 'lodash/merge'
 import qs from 'qs'
 
+
+
 /**
  * 实例化
  * config是库的默认值，然后是实例的 defaults 属性，最后是请求设置的 config 参数。后者将优先于前者
@@ -21,17 +23,51 @@ http.interceptors.request.use(function (config) {
 });
 
 
+const succeeCode = 1; // 成功
+/**
+ * 状态码判断 具体根据当前后台返回业务来定
+ * @param {*请求状态码} status 
+ * @param {*错误信息} err 
+ */
+const errorHandle = (status, err) => {
+    switch (status) {
+        case 401:
+            break;
+        case 404:
+            vm.$message({ message: '请求路径不存在', type: 'warning' });
+            break;
+        default:
+            console.log(err);
+    }
+}
 /**
  * 响应拦截
  */
 http.interceptors.response.use(response => {
-    // 过期之类的操作
-    if (response.data && (response.data.code === 401)) {
-        // window.location.href = ''; 重定向
+    if (response.status === 200) {
+        // 你只需改动的是这个 succeeCode ，因为每个项目的后台返回的code码各不相同
+        if (response.data.code === succeeCode) {
+            return Promise.resolve(response);
+        } else {
+            vm.$message({ message: '警告哦，这是一条警告消息', type: 'warning' });
+            return Promise.reject(response)
+        }
+    } else {
+        return Promise.reject(response)
     }
-    return response
 }, error => {
-    return Promise.reject(error)
+    const { response } = error;
+    if (response) {
+        // 请求已发出，但是不在2xx的范围 
+        errorHandle(response.status, response.data.msg);
+        return Promise.reject(response);
+    } else {
+        // 处理断网的情况
+        if (!window.navigator.onLine) {
+            vm.$message({ message: '你的网络已断开，请检查网络', type: 'warning' });
+        }
+        return Promise.reject(error);
+    }
 })
 
 

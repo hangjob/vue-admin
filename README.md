@@ -48,6 +48,7 @@ npm run build
 
 ### 附加功能
 1. vue如何刷新当前页面
+2. 封装WebSocket
 
 ### 目录结构
 ```shell
@@ -59,6 +60,7 @@ npm run build
 ├──|── layout                   布局文件
 ├──|── mock                     测试数据
 ├──|── modules                  放置动态是添加路由的页面
+├──|── plugin                   插件
 ├──|── router                   路由
 ├──|── store                    vuex数据管理
 ├──|── utils                    工具文件
@@ -261,6 +263,56 @@ router.beforeEach((to, from, next) => {
 如果动态添加路由抛警告，路由重复添加，需要添加 `router.matcher = new VueRouter().matcher`
 
 ### axios配置
+其中响应拦截
+```js
+const succeeCode = 1; // 成功
+/**
+ * 状态码判断 具体根据当前后台返回业务来定
+ * @param {*请求状态码} status 
+ * @param {*错误信息} err 
+ */
+const errorHandle = (status, err) => {
+    switch (status) {
+        case 401:
+            vm.$message({ message: '你还未登录', type: 'warning' });
+            break;
+        case 404:
+            vm.$message({ message: '请求路径不存在', type: 'warning' });
+            break;
+        default:
+            console.log(err);
+    }
+}
+/**
+ * 响应拦截
+ */
+http.interceptors.response.use(response => {
+    if (response.status === 200) {
+        // 你只需改动的是这个 succeeCode ，因为每个项目的后台返回的code码各不相同
+        if (response.data.code === succeeCode) {
+            return Promise.resolve(response);
+        } else {
+            vm.$message({ message: '警告哦，这是一条警告消息', type: 'warning' });
+            return Promise.reject(response)
+        }
+    } else {
+        return Promise.reject(response)
+    }
+}, error => {
+    const { response } = error;
+    if (response) {
+        // 请求已发出，但是不在2xx的范围 
+        errorHandle(response.status, response.data.msg);
+        return Promise.reject(response);
+    } else {
+        // 处理断网的情况
+        if (!window.navigator.onLine) {
+            vm.$message({ message: '你的网络已断开，请检查网络', type: 'warning' });
+        }
+        return Promise.reject(error);
+    }
+})
+```
 在`http/request.js`
 ```js
 import http from './src/http/request'
@@ -422,6 +474,83 @@ export default {
 </script>
 ```
 然后其它任何想刷新自己的路由页面，都可以这样: `this.reload()`
+
+
+### 封装WebSocket
+具体实例 `utils\websocket.js`
+```js
+const WSS_URL = `wss://wss.xxxx.com/ws?appid=xxx`
+let setIntervalWesocketPush = null
+
+export default class websocket {
+    createSocket() {
+        if (!this.Socket) {
+            console.log('建立websocket连接')
+            this.Socket = new WebSocket(WSS_URL)
+            this.Socket.onopen = this.onopenWS
+            this.Socket.onmessage = this.onmessageWS
+            this.Socket.onerror = this.onerrorWS
+            this.Socket.onclose = this.oncloseWS
+        } else {
+            console.log('websocket已连接')
+        }
+    }
+
+    /**打开WS之后发送心跳 */
+    onopenWS() {
+        this.sendPing() //发送心跳
+    }
+
+    /**连接失败重连 */
+    onerrorWS() {
+        clearInterval(setIntervalWesocketPush)
+        this.Socket.close()
+        createSocket() //重连
+    }
+
+    /**WS数据接收统一处理 */
+    onmessageWS(res) {
+        console.log(res)
+    }
+
+    /**
+     * 发送数据
+     * readyState = 3  连接已经关闭或者根本没有建立
+     * readyState = 2  连接正在进行关闭握手，即将关闭
+     * readyState = 1  连接成功建立，可以进行通信
+     * readyState = 0  正在建立连接，连接还没有完成
+     * @param {*发送内容} content 
+     */
+    sendWSPush(content) {
+        if (this.Socket !== null && this.Socket.readyState === 3) {
+            this.Socket.close()
+            this.createSocket() //重连
+        } else if (this.Socket.readyState === 1) {
+            this.Socket.send(content)
+        } else if (this.Socket.readyState === 0) {
+            setTimeout(() => {
+                this.Socket.send(content)
+            }, 5000)
+        }
+    }
+
+    /**关闭WS */
+    oncloseWS() {
+        clearInterval(setIntervalWesocketPush)
+        console.log('websocket已断开')
+    }
+
+
+    /**发送心跳 */
+    sendPing() {
+        this.Socket.send('ping')
+        setIntervalWesocketPush = setInterval(() => {
+            this.Socket.send('ping')
+        }, 5000)
+    }
+}
+```
+
 
 ### 如有疑问
 可以加群一起讨论关于vue-cli打包编译的见解，你的一个小小的改动就是一个大的进步
