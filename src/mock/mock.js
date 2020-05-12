@@ -28,4 +28,4 @@ const produceNewsData = function () {
 }
 
 
-Mock.mock('/mock/menu', produceNewsData)
+Mock.mock('/mock/menu', {data:{list:produceNewsData},code:1,msg:'请求成功'})

@@ -49,6 +49,7 @@ npm run build
 ### 附加功能
 1. vue如何刷新当前页面
 2. 封装WebSocket
+3. 增加指令directive
 
 ### 目录结构
 ```shell
@@ -550,8 +551,22 @@ export default class websocket {
     }
 }
 ```
-
-
+### 增加指令directive
+```js
+import Vue from 'vue';
+const has = {
+    inserted: function (el, binding) {
+        // 添加指令 传入的  value
+        if (!binding.value) {
+            el.parentNode.removeChild(el);
+        }
+    }
+}
+Vue.directive('has',has)
+```
+```html
+	<el-button type="primary" v-has="true">主要按钮1</el-button>
+```
 ### 如有疑问
 可以加群一起讨论关于vue-cli打包编译的见解，你的一个小小的改动就是一个大的进步
 ![vue.config.js交流圈](https://i.loli.net/2020/05/09/Io6cJahlkR7ZtqM.jpg)

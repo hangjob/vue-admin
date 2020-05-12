@@ -3,7 +3,7 @@
 		<div>px-rem</div>
 		<img src="@/assets/logo.png" />
 		<PMheader></PMheader>
-		<el-button type="primary">主要按钮1</el-button>
+		<el-button type="primary" v-has="true">主要按钮1</el-button>
 	</div>
 </template>
 <script>

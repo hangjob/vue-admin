@@ -22,8 +22,9 @@ const menusMap = function (menu) {
 // 获取路由
 const addPostRouter = function (to, from, next, selfaddRoutes) {
     http.windPost('/mock/menu')
-        .then(menu => {
-            defaultRouter[0].children.push(...menusMap(menu));
+        .then(data => {
+            console.log(data)
+            defaultRouter[0].children.push(...menusMap(data.data.list));
             selfaddRoutes(defaultRouter);
             store.commit('hasRoute', true);
             next({ ...to, replace: true })
