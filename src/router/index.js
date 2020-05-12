@@ -9,6 +9,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+import NProgress from 'nprogress'
 
 import defaultRouter from './defaultRouter'
 import dynamicRouter from './dynamicRouter';
@@ -42,11 +43,19 @@ const selfaddRoutes = function(params) {
 
 router.beforeEach((to, from, next) => {
     const { hasRoute } = store.state;
+    NProgress.start();
     if (hasRoute) {
         next()
     } else {
         dynamicRouter(to, from, next, selfaddRoutes)
     }
+})
+
+router.afterEach((to,from)=>{
+    setTimeout(()=>{
+        NProgress.done();
+        NProgress.remove();
+    },3000)
 })
 
 export default router;

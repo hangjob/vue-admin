@@ -23,7 +23,6 @@ http.interceptors.request.use(function (config) {
 });
 
 
-const succeeCode = 1; // 成功
 /**
  * 状态码判断 具体根据当前后台返回业务来定
  * @param {*请求状态码} status 
@@ -45,13 +44,7 @@ const errorHandle = (status, err) => {
  */
 http.interceptors.response.use(response => {
     if (response.status === 200) {
-        // 你只需改动的是这个 succeeCode ，因为每个项目的后台返回的code码各不相同
-        if (response.data.code === succeeCode) {
-            return Promise.resolve(response);
-        } else {
-            vm.$message({ message: '警告哦，这是一条警告消息', type: 'warning' });
-            return Promise.reject(response)
-        }
+        return Promise.resolve(response);
     } else {
         return Promise.reject(response)
     }
