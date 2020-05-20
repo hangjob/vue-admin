@@ -52,10 +52,8 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to,from)=>{
-    setTimeout(()=>{
-        NProgress.done();
-        NProgress.remove();
-    },3000)
+    NProgress.done();
+    NProgress.remove();
 })
 
 export default router;

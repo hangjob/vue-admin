@@ -568,5 +568,4 @@ Vue.directive('has',has)
 	<el-button type="primary" v-has="true">主要按钮1</el-button>
 ```
 ### 如有疑问
-可以加群一起讨论关于vue-cli打包编译的见解，你的一个小小的改动就是一个大的进步
-![vue.config.js交流圈](https://i.loli.net/2020/05/09/Io6cJahlkR7ZtqM.jpg)
+QQ群：751432041
