@@ -1,15 +1,21 @@
-const WSS_URL = `wss://wss.xxxx.com/ws?appid=xxx`
+const WSS_URL = `ws://123.207.136.134:9010/ajaxchattest`
 let setIntervalWesocketPush = null
 
 export default class websocket {
+
+    constructor(){
+        this.Socket = null;
+        this.createSocket();
+    }
+
     createSocket() {
         if (!this.Socket) {
             console.log('建立websocket连接')
             this.Socket = new WebSocket(WSS_URL)
-            this.Socket.onopen = this.onopenWS
-            this.Socket.onmessage = this.onmessageWS
-            this.Socket.onerror = this.onerrorWS
-            this.Socket.onclose = this.oncloseWS
+            this.onopenWS();
+            this.onmessageWS();
+            this.onerrorWS();
+            this.oncloseWS();
         } else {
             console.log('websocket已连接')
         }
@@ -17,19 +23,31 @@ export default class websocket {
 
     /**打开WS之后发送心跳 */
     onopenWS() {
-        this.sendPing() //发送心跳
+        this.Socket.onopen = ()=>{
+            console.log('发送心跳')
+            this.sendPing() //发送心跳
+        }
     }
 
     /**连接失败重连 */
     onerrorWS() {
-        clearInterval(setIntervalWesocketPush)
-        this.Socket.close()
-        createSocket() //重连
+        this.Socket.onerror = ()=>{
+            console.log('连接失败发送重连')
+            clearInterval(setIntervalWesocketPush);
+            this.Socket.close()
+            this.createSocket() //重连
+        }
     }
 
     /**WS数据接收统一处理 */
-    onmessageWS(res) {
-        console.log(res)
+    onmessageWS(callback) {
+        this.Socket.onmessage = (res)=>{
+            if(res.data){
+                callback && callback(res.data)
+            }else{
+                console.log('服务端返回的错误状态码')
+            }
+        }
     }
 
     /**
@@ -53,10 +71,13 @@ export default class websocket {
         }
     }
 
+
     /**关闭WS */
     oncloseWS() {
-        clearInterval(setIntervalWesocketPush)
-        console.log('websocket已断开')
+        this.Socket.onclose = ()=>{
+            clearInterval(setIntervalWesocketPush)
+            console.log('websocket已断开')
+        }
     }
 
 
@@ -65,6 +86,6 @@ export default class websocket {
         this.Socket.send('ping')
         setIntervalWesocketPush = setInterval(() => {
             this.Socket.send('ping')
-        }, 5000)
+        }, 1000*30)
     }
 }
