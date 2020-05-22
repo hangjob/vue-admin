@@ -2,6 +2,7 @@ import axios from "axios";
 import merge from 'lodash/merge'
 import qs from 'qs'
 
+const succeeCode = 1; // 成功
 
 
 /**
@@ -11,6 +12,10 @@ import qs from 'qs'
 const http = axios.create({
     timeout: 1000 * 30,
     withCredentials: true, // 表示跨域请求时是否需要使用凭证
+    headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json; charset=utf-8'
+    }
 });
 
 /**
@@ -28,12 +33,13 @@ http.interceptors.request.use(function (config) {
  * @param {*请求状态码} status 
  * @param {*错误信息} err 
  */
-const errorHandle = (status, err) => {
+const errorHandle = (status, response) => {
+    console.log(response)
     switch (status) {
         case 401:
             break;
         case 404:
-            vm.$message({ message: '请求路径不存在', type: 'warning' });
+            vm.$message({ message: `请求路径不存在 ${response.request.responseURL}`, type: 'warning', duration: 1000 * 10, showClose: true });
             break;
         default:
             console.log(err);
@@ -44,7 +50,12 @@ const errorHandle = (status, err) => {
  */
 http.interceptors.response.use(response => {
     if (response.status === 200) {
-        return Promise.resolve(response);
+        if (response.data.code == succeeCode) {
+            return Promise.resolve(response);
+        } else {
+            vm.$message({ message: response.data.msg, type: 'warning', duration: 1000 * 10, showClose: true });
+            return Promise.reject(response)
+        }
     } else {
         return Promise.reject(response)
     }
@@ -52,7 +63,7 @@ http.interceptors.response.use(response => {
     const { response } = error;
     if (response) {
         // 请求已发出，但是不在2xx的范围 
-        errorHandle(response.status, response.data.msg);
+        errorHandle(response.status, response);
         return Promise.reject(response);
     } else {
         // 处理断网的情况
@@ -108,7 +119,7 @@ http.adornData = (data = {}, openDefultdata = true, contentType = 'json') => {
  */
 http.windPost = function (url, params) {
     return new Promise((resolve, reject) => {
-        http.post(http.adornUrl(url), qs.stringify(params))
+        http.post(http.adornUrl(url), params)
             .then(res => {
                 resolve(res.data)
             })
