@@ -1012,3 +1012,13 @@ export const appendQuery = (url, key, value) => {
     }
     return url;
 }
+
+
+/**
+ * 判断a数组是否包含b数组中
+ */
+export const getArrRepeat = (arr1,arr2) =>{
+    return arr1.filter((item,index) =>{
+        return arr2.includes(item)
+    })
+} 
