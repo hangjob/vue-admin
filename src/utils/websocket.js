@@ -1,23 +1,25 @@
-const WSS_URL = `ws://123.207.136.134:9010/ajaxchattest`
+// const WSS_URL = `ws://123.207.136.134:9010/ajaxchattest`
+
 let setIntervalWesocketPush = null
 
 export default class websocket {
 
-    constructor(){
+    constructor(prop){
         this.Socket = null;
+        this.wxurl = prop.wxurl;
         this.createSocket();
     }
 
     createSocket() {
         if (!this.Socket) {
             console.log('建立websocket连接')
-            this.Socket = new WebSocket(WSS_URL)
+            this.Socket = new WebSocket(this.wxurl)
             this.onopenWS();
             this.onmessageWS();
             this.onerrorWS();
             this.oncloseWS();
         } else {
-            console.log('websocket已连接')
+            console.log('已创建websocket')
         }
     }
 
@@ -42,6 +44,7 @@ export default class websocket {
     /**WS数据接收统一处理 */
     onmessageWS(callback) {
         this.Socket.onmessage = (res)=>{
+            console.log(res);
             if(res.data){
                 callback && callback(res.data)
             }else{
