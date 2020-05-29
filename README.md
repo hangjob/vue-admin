@@ -479,7 +479,7 @@ export default {
 
 ### 封装WebSocket
 具体实例 `utils\websocket.js`
-```
+
 
 ### 增加指令directive
 ```js
