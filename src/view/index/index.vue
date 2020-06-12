@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div>px-rem</div>
+		<div style="font-size:30px">px-rem</div>
 		<img src="@/assets/logo.png" />
 		<PMheader></PMheader>
 		<el-button type="primary" v-has="true">主要按钮1</el-button>
