@@ -1040,7 +1040,7 @@ export const arrChunk = (data=[],space=5) => {
 /**
  * 复制内容
  */
-utils.copyToClip = (content) => {
+export const copyToClip = (content) => {
     var aux = document.createElement("input");
     aux.setAttribute("value", content);
     document.body.appendChild(aux);
@@ -1053,7 +1053,7 @@ utils.copyToClip = (content) => {
 /**
  * 生成uuid
  */
-utils.generateUUID = () => {
+export const generateUUID = () => {
     let d = new Date().getTime();
     let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         let r = (d + Math.random() * 16) % 16 | 0;
