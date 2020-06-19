@@ -1,16 +1,10 @@
 <template>
-    <div>
-        <div>main</div>
-        <transition name="fade">
-            <router-view></router-view>
-        </transition>
-    </div>
+	<transition name="fade">
+		<router-view></router-view>
+	</transition>
 </template>
 <script>
-export default {
-    
-}
+export default {};
 </script>
 <style lang="less" scoped>
-
 </style>

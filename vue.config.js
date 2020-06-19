@@ -43,7 +43,6 @@ const cdn = {
 }
 
 module.exports = {
-
     lintOnSave: false, // 关闭eslint
     productionSourceMap: false,
     publicPath: './',
