@@ -92,7 +92,7 @@ export default {
             this.isPlay = false;
             this.audioSrc = this.audioSrcs[Math.floor(Math.random() * 5)];
             this.music.load()
-            // 文件下载完毕
+            // 文件下载完毕，如果不用等到全部下载完毕，可以用canplay事件
             this.music.addEventListener("canplaythrough", () => {
                 this.music.play();
                 this.isPlay = true;
@@ -117,6 +117,7 @@ export default {
                 this.switchMusic(); // 自动播放
             });
             // 捕获音频文件已准备完毕
+            // 当媒体文件可以播放的时候会触发oncanplay事件,也可以用oncanplay
             this.music.oncanplaythrough = () => {
                 let time = this.music.duration;
                 //分钟
