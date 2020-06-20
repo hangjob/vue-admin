@@ -50,6 +50,7 @@ npm run build
 1. vue如何刷新当前页面
 2. 封装WebSocket
 3. 增加指令directive
+4. 添加音乐小插件
 
 ### 目录结构
 ```shell
@@ -497,5 +498,13 @@ Vue.directive('has',has)
 ```html
 	<el-button type="primary" v-has="true">主要按钮1</el-button>
 ```
+
+### 添加音乐小插件
+
+具体实例 `src/view/music`
+启动项目访问music路由`xxxx/#/music`
+
+![音乐小插件](https://i.loli.net/2020/06/20/ti6SvdxBLG5XRr3.png)
+
 ### 如有疑问
 QQ群：751432041
