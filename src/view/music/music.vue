@@ -117,7 +117,7 @@ export default {
                 this.switchMusic(); // 自动播放
             });
             // 捕获音频文件已准备完毕
-            this.music.oncanplay = () => {
+            this.music.oncanplaythrough = () => {
                 let time = this.music.duration;
                 //分钟
                 let minutes = parseInt(time / 60);
