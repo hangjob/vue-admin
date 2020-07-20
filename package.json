@@ -16,7 +16,7 @@
     "element-ui": "^2.13.1",
     "jquery": "^3.5.0",
     "lib-flexible": "^0.3.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "nprogress": "^0.2.0",
     "qs": "^6.9.3",
     "vue": "^2.6.11",
