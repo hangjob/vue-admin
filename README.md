@@ -1,3 +1,11 @@
+
+# [最新vite2.6配置](https://github.com/hangjob/vue-vite-admin-ts)
+
+[查看项目](https://github.com/hangjob/vue-vite-admin-ts)  持续更新
+
+[演示项目](https://hangjob.github.io/vue-vite-admin-ts/dist/lib.html)
+
+
 # 一份完整的vue-cli3项目基础配置项
 
 ### 网站例子
