@@ -1,5 +1,5 @@
 
-# [最新vite2.6配置](https://github.com/hangjob/vue-vite-admin-ts)
+# [最新vite3.x配置](https://github.com/hangjob/vue-vite-admin-ts)
 
 [查看项目](https://github.com/hangjob/vue-vite-admin-ts)  持续更新
 
